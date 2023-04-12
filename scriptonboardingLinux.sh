@@ -52,7 +52,7 @@ echo "Usuario:"
 read usuario
 echo "Numero de la maquina"
 read nummaquina
-#FuncUsuario
+FuncUsuario
 FuncCrowdstrike
 #FuncLandscape
 #FuncCompanyPortal
