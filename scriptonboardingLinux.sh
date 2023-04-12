@@ -2,11 +2,10 @@
 set -x
 #FUNCIONES
 FuncUsuario(){
-sudo useradd -U -d "/home/$usuario" -m -p $(openssl passwd -1 "Scalefast-Linux$nummaquina") -s "/bin/bash" "$usuario"
+sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-Linux$2") -s "/bin/bash" "$1"
 }
 
 FuncCrowdstrike(){
-#AQUI FALTA EL PASO DE DESCARGAR EL PAQUETE DE GIT
 sudo git clone https://github.com/Enhra/LinuxOnboarding.git
 #INSTALACION DEL ANTIVIRUS
 
@@ -33,7 +32,7 @@ sudo apt update
 sudo apt install ubuntu-advantage-tools
 sudo ua attach C143Fk3339bBpsDTkNFgbgAPcvQjxe
 sudo apt-get install landscape-client -y
-sudo landscape-config --computer-title "PTT$nummaquina" --account-name scalefast-sl -y
+sudo landscape-config --computer-title "PTT$2" --account-name scalefast-sl -y
 }
 
 #INSTALACION COMPANYPORTAL
@@ -53,7 +52,6 @@ echo "Usuario:"
 read usuario
 echo "Numero de la maquina"
 read nummaquina
-admin="ptt$nummaquina"
 #FuncUsuario
 FuncCrowdstrike
 #FuncLandscape
