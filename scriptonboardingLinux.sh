@@ -48,11 +48,8 @@ sudo apt install intune-portal -y
 }
 
 #ESTRUCTURA
-echo "Usuario:"
-read usuario
-echo "Numero de la maquina"
-read nummaquina
 FuncUsuario
+echo "Creando usuario $1 de la maquina $2"
 FuncCrowdstrike
 #FuncLandscape
 #FuncCompanyPortal
