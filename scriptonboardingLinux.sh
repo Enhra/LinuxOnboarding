@@ -13,6 +13,7 @@ sudo git clone https://github.com/Enhra/LinuxOnboarding.git
 unzip LinuxOnboarding/'Crowdstrike for Linux.zip'
 sudo dpkg -i 'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
 sudo rm -r LinuxOnboarding
+sudo rm -r 'Crowdstrike for Linux'
 
 #INSTALACION DE LA LICENCIA
 sudo /opt/CrowdStrike/falconctl -s --cid=9AFD91A4139D4651969540068C664FBF-7C
@@ -20,6 +21,7 @@ sudo /opt/CrowdStrike/falconctl -s --cid=9AFD91A4139D4651969540068C664FBF-7C
 #INSTALACION OPENSSL
 wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+sudo rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 systemctl start falcon-sensor
 systemctl enable falcon-sensor
 sudo apt-get update
