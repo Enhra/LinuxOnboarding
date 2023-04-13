@@ -40,7 +40,7 @@ FuncCompanyPortal(){
 sudo apt install curl gpg -y
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/prod jammy main" > /etc/apt/sources.list.d/microsoft-ubuntu-jammy-prod.list' 
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/prod jammy main" > /etc/apt/sources.list.d/microsoft-ubuntu-jammy-prod.list'
 sudo rm microsoft.gpg
 sudo apt update
 sudo apt install intune-portal -y
@@ -48,7 +48,8 @@ sudo apt install intune-portal -y
 }
 
 #ESTRUCTURA
-FuncUsuario
+#FuncUsuario
+sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-Linux$2") -s "/bin/bash" "$1"
 echo "Creando usuario $1 de la maquina $2"
 FuncCrowdstrike
 #FuncLandscape
