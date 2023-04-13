@@ -46,9 +46,8 @@ sudo apt install intune-portal -y
 }
 
 #ESTRUCTURA
-#FuncUsuario
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-Linux$2") -s "/bin/bash" "$1"
 echo "Creando usuario $1 de la maquina $2"
 FuncCrowdstrike
-#FuncLandscape
-#FuncCompanyPortal
+FuncLandscape
+FuncCompanyPortal
