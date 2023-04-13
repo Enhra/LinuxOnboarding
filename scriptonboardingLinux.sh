@@ -1,14 +1,12 @@
 #!/bin/bash
 set -x
 #FUNCIONES
-FuncUsuario(){
-sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-Linux$2") -s "/bin/bash" "$1"
-}
 
 FuncCrowdstrike(){
+#LlAMADA AL REPOSITORIO
 sudo git clone https://github.com/Enhra/LinuxOnboarding.git
-#INSTALACION DEL ANTIVIRUS
 
+#INSTALACION DEL ANTIVIRUS
 unzip LinuxOnboarding/'Crowdstrike for Linux.zip'
 sudo dpkg -i 'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
 sudo rm -r LinuxOnboarding
