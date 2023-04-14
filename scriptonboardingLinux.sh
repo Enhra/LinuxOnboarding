@@ -30,7 +30,7 @@ sudo apt update
 sudo apt install ubuntu-advantage-tools
 sudo ua attach C143Fk3339bBpsDTkNFgbgAPcvQjxe
 sudo apt-get install landscape-client -y
-sudo landscape-config --computer-title "PTT$2" --account-name scalefast-sl -y
+sudo landscape-config --computer-title "PTT$1" --account-name 'scalefast-sl'
 }
 
 #INSTALACION COMPANYPORTAL
@@ -47,7 +47,6 @@ sudo apt install intune-portal -y
 
 #ESTRUCTURA
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
-echo "Creando usuario $1 de la maquina $2"
 FuncCrowdstrike
-FuncLandscape
+FuncLandscape "$2"
 FuncCompanyPortal
