@@ -30,7 +30,7 @@ sudo apt update
 sudo apt install ubuntu-advantage-tools
 sudo ua attach C143Fk3339bBpsDTkNFgbgAPcvQjxe
 sudo apt-get install landscape-client -y
-sudo landscape-config --computer-title "PTT$1" --account-name 'scalefast-sl'
+sudo landscape-config --computer-title "PTT$1" --account-name 'scalefast-sl' -y
 }
 
 #INSTALACION COMPANYPORTAL
