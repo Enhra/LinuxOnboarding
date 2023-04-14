@@ -1,7 +1,13 @@
 #!/bin/bash
-set -x
+#set -x
+#
+#VARIABLES DE INFO
+info="\033[0;36m[:]\033[m"
+msg="\033[1;32m[+]\033[m"
+err="\033[1;31m[:]\033[m"
+#
 #FUNCIONES
-
+#
 FuncCrowdstrike(){
 #LlAMADA AL REPOSITORIO
 sudo git clone https://github.com/Enhra/LinuxOnboarding.git
