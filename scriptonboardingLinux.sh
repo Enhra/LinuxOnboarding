@@ -76,9 +76,21 @@ sudo apt install landscape-client -y
 echo -e "${msg} Landscape instalado"
 #
 }
+#FUNCION ARCHIVO DE CONFIGURACIÓN
+FuncConfig(){
+echo '[client]' >> config.txt
+echo 'log_level = info'>> config.txt
+echo 'url = https://landscape.canonical.com/message-system' >> config.txt
+echo 'ping_url = http://landscape.canonical.com/ping' >> config.txt
+echo 'data_path = /var/lib/landscape/client' >> config.txt
+echo "computer_title = PTT$1" >> config.txt
+echo 'account_name = scalefast-sl' >> config.txt
+echo 'script_users = root' >> config.txt
+echo 'include_manager_plugins = ScriptExecution' >> config.txt
+}
 
-#INSTALACION COMPANYPORTAL
-FuncCompanyPortal(){
+#INSTALACION MICROSOFT INTUNE
+FuncMicrosoftIntune(){
 #
 echo -e "${info} Instalando a clave publica de microsoft"
 #
@@ -100,19 +112,24 @@ echo -e "${msg} Microsoft Intune instalado"
 #
 }
 
+
+
 #ESTRUCTURA
 echo -e "${info}Añadiendo usuario"
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 echo -e "${info}Usuario añadido"
 FuncCrowdstrike
 FuncLandscape
+FuncConfig $2
+#
 echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
 #
-sudo landscape-config --computer-title "PTT$2" --account-name 'scalefast-sl' -y
+sudo landscape-config --config=config.txt
 #
 echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
-FuncCompanyPortal
+sudo rm config.txt
+FuncMicrosoftIntune
 
 for i in $(seq 10 -1 0);
 do
