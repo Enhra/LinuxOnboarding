@@ -1,13 +1,13 @@
 #!/bin/bash
 #set -x
-#
+
 #VARIABLES DE INFO
 info="\033[0;36m[:]\033[m"
 msg="\033[1;32m[+]\033[m"
 err="\033[1;31m[:]\033[m"
-#
+
 #FUNCIONES
-#
+
 FuncCrowdstrike(){
 #LlAMADA AL REPOSITORIO
 #
@@ -17,6 +17,7 @@ sudo git clone https://github.com/Enhra/LinuxOnboarding.git
 #
 echo -e "${msg} Repositorio listo"
 #
+
 #INSTALACION DEL ANTIVIRUS
 #
 echo -e "${info} Instalando Crowdstrike"
@@ -33,6 +34,7 @@ sudo rm -r 'Crowdstrike for Linux'
 #
 echo -e "${msg} Repositorio borrado"
 #
+
 #INSTALACION DE LA LICENCIA
 #
 echo -e "${info} Aplicando licencia de Crowdstrike"
@@ -41,6 +43,7 @@ sudo /opt/CrowdStrike/falconctl -s --cid=9AFD91A4139D4651969540068C664FBF-7C
 #
 echo -e "${msg} Licencia aplicada"
 #
+
 #INSTALACION OPENSSL
 #
 echo -e "${info} Instalando OpenSSL"
@@ -101,7 +104,6 @@ sudo apt install intune-portal -y
 #
 echo -e "${msg} Microsoft Intune instalado"
 #
-#reboot
 }
 
 #ESTRUCTURA
@@ -111,3 +113,12 @@ echo -e "${info}Usuario añadido"
 FuncCrowdstrike
 FuncLandscape "$2"
 FuncCompanyPortal
+
+for i in $(seq 10 -1 0);
+do
+echo -e "${info}El equipo se reiniciara en $i segundos"
+sleep 1
+        if [[ $i = 0 ]]
+        then reboot;
+        fi
+done
