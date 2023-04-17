@@ -75,12 +75,6 @@ sudo apt install landscape-client -y
 #
 echo -e "${msg} Landscape instalado"
 #
-echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
-#
-sudo landscape-config --computer-title "PTT$1" --account-name 'scalefast-sl' -y
-#
-echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
-#
 }
 
 #INSTALACION COMPANYPORTAL
@@ -111,7 +105,13 @@ echo -e "${info}Añadiendo usuario"
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 echo -e "${info}Usuario añadido"
 FuncCrowdstrike
-FuncLandscape "$2"
+FuncLandscape
+echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
+#
+sudo landscape-config --computer-title "PTT$2" --account-name 'scalefast-sl'
+#
+echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
+#
 FuncCompanyPortal
 
 for i in $(seq 10 -1 0);
