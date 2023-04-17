@@ -128,7 +128,7 @@ sudo landscape-config --silent --config=config.txt
 #
 echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
-sudo rm config.txt
+#sudo rm config.txt
 FuncMicrosoftIntune
 
 for i in $(seq 10 -1 0);
