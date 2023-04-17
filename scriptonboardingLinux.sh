@@ -108,7 +108,7 @@ FuncCrowdstrike
 FuncLandscape
 echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
 #
-sudo landscape-config --computer-title "PTT$2" --account-name 'scalefast-sl'
+sudo landscape-config --computer-title "PTT$2" --account-name 'scalefast-sl' -y
 #
 echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
