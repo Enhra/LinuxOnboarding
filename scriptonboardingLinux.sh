@@ -124,7 +124,7 @@ FuncConfig $2
 #
 echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
 #
-sudo landscape-config --config=config.txt
+sudo landscape-config --silent -config=config.txt 
 #
 echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
