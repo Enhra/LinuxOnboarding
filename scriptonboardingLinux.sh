@@ -78,7 +78,7 @@ echo -e "${msg} Landscape instalado"
 }
 #FUNCION ARCHIVO DE CONFIGURACIÓN
 FuncConfig(){
-echo "[client] \nlog_level = info \nurl = https://landscape.canonical.com/message-system \nping_url = http://landscape.canonical.com/ping \ndata_path = /var/lib/landscape/client \ncomputer_title = PTT$1 \naccount_name = scalefast-sl \nscript_users = root \ninclude_manager_plugins = ScriptExecution" >> config.txt
+echo -e "[client] \nlog_level = info \nurl = https://landscape.canonical.com/message-system \nping_url = http://landscape.canonical.com/ping \ndata_path = /var/lib/landscape/client \ncomputer_title = PTT$1 \naccount_name = scalefast-sl \nscript_users = root \ninclude_manager_plugins = ScriptExecution" >> config.txt
 }
 
 #INSTALACION MICROSOFT INTUNE
