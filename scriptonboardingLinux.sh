@@ -111,7 +111,7 @@ echo -e "${info}Añadiendo usuario"
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 echo -e "${info}Usuario añadido"
 echo -e "${info}Instalando Git"
-sudo apt-get install git
+sudo apt-get install git -y
 echo -e "${info}Git instalado"
 FuncCrowdstrike
 FuncLandscape
