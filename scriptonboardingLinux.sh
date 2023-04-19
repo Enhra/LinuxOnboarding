@@ -98,7 +98,7 @@ sudo apt-get update
 #
 echo -e "${info} Instalando Microsoft Intune"
 #
-sudo apt install intune-portal -y
+sudo apt-get install intune-portal -y
 #
 echo -e "${msg} Microsoft Intune instalado"
 #
@@ -119,7 +119,7 @@ FuncConfig $2
 #
 echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
 #
-sudo landscape-config --silent --config=config.txt -y
+sudo landscape-config --silent --config=config.txt
 #
 echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
