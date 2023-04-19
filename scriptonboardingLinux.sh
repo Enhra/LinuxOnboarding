@@ -53,7 +53,7 @@ sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 sudo rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 systemctl start falcon-sensor
 systemctl enable falcon-sensor
-sudo apt update
+sudo apt-get update
 #
 echo -e "${msg} OpenSSL instalado"
 #
@@ -64,14 +64,14 @@ FuncLandscape(){
 #
 echo -e "${info} Instalando ubuntu advanced tools"
 #
-sudo apt install ubuntu-advantage-tools
+sudo apt-get install ubuntu-advantage-tools
 #
 echo -e "${msg} Ubuntu advanced tools instalado"
 #
 echo -e "${info} Instalando Landscape"
 #
 sudo ua attach C143Fk3339bBpsDTkNFgbgAPcvQjxe
-sudo apt install landscape-client -y
+sudo apt-get install landscape-client -y
 #
 echo -e "${msg} Landscape instalado"
 #
@@ -86,7 +86,7 @@ FuncMicrosoftIntune(){
 #
 echo -e "${info} Instalando a clave publica de microsoft"
 #
-sudo apt install curl gpg -y
+sudo apt-get install curl gpg -y
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/prod jammy main" > /etc/apt/sources.list.d/microsoft-ubuntu-jammy-prod.list'
@@ -94,7 +94,7 @@ sudo rm microsoft.gpg
 #
 echo -e "${msg} Clave publica de Microsoft instalada"
 #
-sudo apt update
+sudo apt-get update
 #
 echo -e "${info} Instalando Microsoft Intune"
 #
@@ -111,7 +111,7 @@ echo -e "${info}Añadiendo usuario"
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 echo -e "${info}Usuario añadido"
 echo -e "${info}Instalando Git"
-sudo apt install git
+sudo apt-get install git
 echo -e "${info}Git instalado"
 FuncCrowdstrike
 FuncLandscape
