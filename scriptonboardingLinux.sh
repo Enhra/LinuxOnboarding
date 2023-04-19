@@ -75,10 +75,12 @@ sudo apt-get install landscape-client -y
 #
 echo -e "${msg} Landscape instalado"
 #
-}
-#FUNCION ARCHIVO DE CONFIGURACIÓN
-FuncConfig(){
-echo -e "[client] \nlog_level = info \nurl = https://landscape.canonical.com/message-system \nping_url = http://landscape.canonical.com/ping \ndata_path = /var/lib/landscape/client \ncomputer_title = PTT$1 \naccount_name = scalefast-sl \nscript_users = root \ninclude_manager_plugins = ScriptExecution" >> config.txt
+echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
+#
+landscape-config --computer-title="PTT$1" --account-name="scalefast-sl" --script-users="root" --silent
+#
+echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
+#
 }
 
 #INSTALACION MICROSOFT INTUNE
@@ -104,8 +106,6 @@ echo -e "${msg} Microsoft Intune instalado"
 #
 }
 
-
-
 #ESTRUCTURA
 echo -e "${info}Añadiendo usuario"
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
@@ -114,15 +114,8 @@ echo -e "${info}Instalando Git"
 sudo apt-get install git -y
 echo -e "${info}Git instalado"
 FuncCrowdstrike
-FuncLandscape
-FuncConfig $2
-#
-echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
-#
-sudo landscape-config --silent --config=config.txt
-#
-echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
-#
+FuncLandscape $2
+
 #sudo rm config.txt
 FuncMicrosoftIntune
 
