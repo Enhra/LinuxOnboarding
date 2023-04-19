@@ -61,10 +61,6 @@ sudo ua attach C143Fk3339bBpsDTkNFgbgAPcvQjxe
 sudo apt-get install landscape-client -y
 echo -e "${msg} Landscape instalado"
 #
-echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
-landscape-config --computer-title="PTT$1" --account-name="scalefast-sl" --script-users="root" --silent
-echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
-#
 }
 
 #INSTALACION MICROSOFT INTUNE, EDGE Y TEAMS
@@ -113,7 +109,11 @@ echo -e "${info}Git instalado"
 #
 FuncCrowdstrike
 #
-FuncLandscape $2
+FuncLandscape
+#
+echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
+landscape-config --computer-title="PTT$1" --account-name="scalefast-sl" --script-users="root" --silent
+echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
 FuncMicrosoftIntune
 
