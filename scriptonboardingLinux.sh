@@ -129,9 +129,7 @@ FuncCrowdstrike
 #
 FuncLandscape
 #
-#echo -e "${info} Uniendo el equipo al Landscape de Scalefast"
-#landscape-config --computer-title="PTT$2" --account-name="scalefast-sl" --script-users="root" --silent
-#echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
+#echo -e "${info} Une el equipo al Landscape de Scalefast mediante el comando: 'landscape-config --computer-title=PTT###ccount-name=scalefast-sl --script-users=root'"
 #
 FuncMicrosoftIntune
 rm -r LinuxOnboarding
