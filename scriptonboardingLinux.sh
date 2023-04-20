@@ -1,100 +1,100 @@
 #!/bin/bash
 #set -x
 
-#VARIABLES DE INFO
+#INFO VARIABLES
 info="\033[0;36m[:]\033[m"
 msg="\033[1;32m[+]\033[m"
 err="\033[1;31m[:]\033[m"
 
-#FUNCIONES
+#FUNCTIONS
 
 FuncCrowdstrike(){
-#LlAMADA AL REPOSITORIO
+#CALL TO THE REPOSITORY
 #
-echo -e "${info} Clonando el repositorio"
+echo -e "${info} CLONNING THE REPOSITORY"
 sudo git clone https://github.com/Enhra/LinuxOnboarding.git
-echo -e "${msg} Repositorio listo"
+echo -e "${msg} REPOSITORY READY"
 #
 
-#INSTALACION DEL ANTIVIRUS
+#CROWDSTRIKE INSTALLATION
 #
-echo -e "${info} Instalando Crowdstrike"
+echo -e "${info} INSTALLING CROWDSTRIKE"
 unzip LinuxOnboarding/'Crowdstrike for Linux.zip'
 dpkg -i 'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
-echo -e "${msg} Crowdstrike instalado"
+echo -e "${msg} CROWDSTRIKE READY"
 #
-echo -e "${info} Eliminando archivos residuales"
+echo -e "${info} DELETING RESIDUAL FILES"
 rm -r 'Crowdstrike for Linux'
-echo -e "${msg} Archivos residuales borrado"
+echo -e "${msg} RESIDUAL FILES DELETED"
 #
 
-#INSTALACION DE LA LICENCIA
+#LICENSE INSTALLATION
 #
-echo -e "${info} Aplicando licencia de Crowdstrike"
+echo -e "${info} INSTALLING CROWDSTRIKE LICENSE"
 sudo /opt/CrowdStrike/falconctl -s --cid=9AFD91A4139D4651969540068C664FBF-7C
-echo -e "${msg} Licencia aplicada"
+echo -e "${msg} LICENSE READY"
 #
 
-#INSTALACION OPENSSL
+#OPENSSL INSTALLATION
 #
-echo -e "${info} Instalando OpenSSL"
+echo -e "${info} INSTALLING OPENSSL"
 wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 sudo rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 systemctl start falcon-sensor
 systemctl enable falcon-sensor
 sudo apt-get update
-echo -e "${msg} OpenSSL instalado"
+echo -e "${msg} OPENSSL READY"
 #
 }
 
-#INSTALACION LANDSCAPE
+#LANDSCAPE INSTALLATION
 FuncLandscape(){
 #
-echo -e "${info} Instalando ubuntu advanced tools"
+echo -e "${info} INSTALLING UBUNTU ADVANCED TOOLS"
 sudo apt-get install ubuntu-advantage-tools
-echo -e "${msg} Ubuntu advanced tools instalado"
+echo -e "${msg} UBUNTU ADVANCED TOOLS READY"
 #
-echo -e "${info} Instalando Landscape"
+echo -e "${info} INSTALLING LANDSCAPE"
 sudo ua attach C143Fk3339bBpsDTkNFgbgAPcvQjxe
 sudo apt-get install landscape-client -y
-echo -e "${msg} Landscape instalado"
+echo -e "${msg} LANDSCAPE READY"
 #
 }
 
-#INSTALACION MICROSOFT INTUNE, EDGE Y TEAMS
+# MICROSOFT INTUNE, EDGE AND TEAMS INSTALLATION
 FuncMicrosoftIntune(){
 #
-echo -e "${info} Instalando paquetes requeridos"
+echo -e "${info} INSTALLING PREVIOUS PACKAGES"
 apt install -y wget apt-transport-https software-properties-common
-echo -e "${msg} Paquetes requeridos instalados"
+echo -e "${msg} PACKAGES READY"
 #
-echo -e "${info} Instalando la clave publica de microsoft"
+echo -e "${info} INSTALLING MICROSOFT PUBLIC KEY"
 wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
 dpkg -i packages-microsoft-prod.deb
-echo -e "${msg} Clave publica de Microsoft instalada"
+echo -e "${msg} MICOSOFT PUBLIC KEY READY"
 sudo apt-get update
 rm packages-microsoft-prod.deb
 #
-echo -e "${info} Instalando Microsoft Intune"
+echo -e "${info} INSTALLING MICROSOFT INTUNE"
 sudo apt-get install intune-portal -y
-echo -e "${msg} Microsoft Intune instalado"
+echo -e "${msg} MICROSOFT INTUNE READY"
 #
-echo -e "${info} Instalando Microsoft Edge"
+echo -e "${info} INSTALLING MICROSOFT EDGE"
 add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
 apt-get install -y microsoft-edge-stable
-echo -e "${msg} Microsoft Edge instalado"
+echo -e "${msg} MICROSOFT EDGE READY"
 #
-echo -e "${info} Instalando Microsoft teams"
+echo -e "${info} INSTALLING MICROSOFT TEAMS"
 add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main"
 apt-get install -y teams
-echo -e "${msg} Microsoft teams instalado"
+echo -e "${msg} MICROSOFT TEAMS READY"
 #
 }
 
-#INSTALACION DE MICROSOFT DEFENDER
+#MICROSOFT DEFENDER INSTALLATION
 FuncDefender(){
-echo -e "${info} Instalando utilidades necesarias"
+echo -e "${info} INSTALLING PREVIOUS UTILITIES"
 apt-get install curl
 apt-get install libplist-utils
 curl -o microsoft.list https://packages.microsoft.com/config/ubuntu/22.04/prod.list
@@ -102,43 +102,47 @@ mv ./microsoft.list /etc/apt/sources.list.d/microsoft-prod.list
 apt-get install gpg
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
 apt-get install apt-transport-https
-sudo apt-get update
+apt-get update
+echo -e "${msg} PREVIOUS UTILITIES READY"
 #
-echo -e "${info} Instalando Microsoft Defender"
+echo -e "${info} INSTALLING MICROSOFT DEFENDER"
 apt install -y mdatp
-echo -e "${msg} Microsoft Defender instalado"
+echo -e "${msg} MICROSOFT DEFENDER INSTALLED"
 #
-echo -e "${info} Estableciendo la configuracion de cliente de Defender"
+echo -e "${info} CLIENT MICROSOFT DEFENDER SETUP"
 unzip LinuxOnboarding/'MicrosoftDefenderATPOnboardingLinuxServer.zip'
 python3 MicrosoftDefenderATPOnboardingLinuxServer.py
 mdatp config real-time-protection --value enabled
-echo -e "${info} Configuracion de cliente de Defender establecida"
+echo -e "${info} CLIENT MICROSOFT DEFENDER SETUP READY"
 }
 
 
 #ESTRUCTURA
-echo -e "${info}Añadiendo usuario"
+if [ "$EUID" -ne 0 ] then 
+echo -e "{$err} PLEASE RUN THIS SCRIPT AS ROOT" 
+exit 1 
+fi
+echo -e "${info}CREATING USER"
 sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
-echo -e "${info}Usuario añadido"
+echo -e "${info}USER READY"
 #
-echo -e "${info}Instalando Git"
+echo -e "${info}INSTALLING GIT"
 sudo apt-get install git -y
-echo -e "${info}Git instalado"
+echo -e "${info}GIT READY"
 #
 FuncCrowdstrike
 #
 FuncLandscape
 #
-#echo -e "${info} Une el equipo al Landscape de Scalefast mediante el comando: 'landscape-config --computer-title=PTT###ccount-name=scalefast-sl --script-users=root'"
-#
 FuncMicrosoftIntune
+#
+FuncDefender
+#
+echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
+echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
+echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
+echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
+echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
+#
 rm -r LinuxOnboarding
 
-for i in $(seq 10 -1 0);
-do
-echo -e "${info}El equipo se reiniciara en $i segundos"
-sleep 1
-        if [[ $i = 0 ]]
-        then reboot;
-        fi
-done
