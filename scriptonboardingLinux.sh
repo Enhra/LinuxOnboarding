@@ -20,13 +20,12 @@ echo -e "${msg} Repositorio listo"
 #
 echo -e "${info} Instalando Crowdstrike"
 unzip LinuxOnboarding/'Crowdstrike for Linux.zip'
-sudo dpkg -i 'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
+dpkg -i 'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
 echo -e "${msg} Crowdstrike instalado"
 #
-echo -e "${info} Eliminando repositorio residual"
-sudo rm -r LinuxOnboarding
-sudo rm -r 'Crowdstrike for Linux'
-echo -e "${msg} Repositorio borrado"
+echo -e "${info} Eliminando archivos residuales"
+rm -r 'Crowdstrike for Linux'
+echo -e "${msg} Archivos residuales borrado"
 #
 
 #INSTALACION DE LA LICENCIA
@@ -91,12 +90,31 @@ add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/ms-tea
 apt-get install -y teams
 echo -e "${msg} Microsoft teams instalado"
 #
+}
+
+#INSTALACION DE MICROSOFT DEFENDER
+FuncDefender(){
+echo -e "${info} Instalando utilidades necesarias"
+apt-get install curl
+apt-get install libplist-utils
+curl -o microsoft.list https://packages.microsoft.com/config/ubuntu/22.04/prod.list
+mv ./microsoft.list /etc/apt/sources.list.d/microsoft-prod.list
+apt-get install gpg
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+apt-get install apt-transport-https
+sudo apt-get update
+#
 echo -e "${info} Instalando Microsoft Defender"
 apt install -y mdatp
 echo -e "${msg} Microsoft Defender instalado"
 #
-
+echo -e "${info} Estableciendo la configuracion de cliente de Defender"
+unzip LinuxOnboarding/'MicrosoftDefenderATPOnboardingLinuxServer.zip'
+python3 MicrosoftDefenderATPOnboardingLinuxServer.py
+mdatp config real-time-protection --value enabled
+echo -e "${info} Configuracion de cliente de Defender establecida"
 }
+
 
 #ESTRUCTURA
 echo -e "${info}Añadiendo usuario"
@@ -116,6 +134,7 @@ FuncLandscape
 #echo -e "${msg} El equipo ha sido unido al Landscape de Scalefast"
 #
 FuncMicrosoftIntune
+rm -r LinuxOnboarding
 
 for i in $(seq 10 -1 0);
 do
