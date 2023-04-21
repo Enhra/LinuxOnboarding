@@ -123,7 +123,8 @@ echo -e "{$err} PLEASE RUN THIS SCRIPT AS ROOT"
 exit 1 
 fi
 echo -e "${info}CREATING USER"
-sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
+useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
+usermod -aG sudo "$1"
 echo -e "${info}USER READY"
 #
 echo -e "${info}INSTALLING GIT"
