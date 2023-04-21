@@ -124,7 +124,7 @@ exit 1
 fi
 echo -e "${info}CREATING USER"
 useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
-usermod -aG sudo "$1"
+gpasswd -a "$1" sudo
 echo -e "${info}USER READY"
 #
 echo -e "${info}INSTALLING GIT"
