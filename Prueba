@@ -1,6 +1,0 @@
-FuncPrueba(){
-echo -e "${info}Añadiendo usuario"
-sudo useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1" 
-echo -e "${info}Usuario añadido"
-}
-FuncPrueba $1 |tee output.txt
