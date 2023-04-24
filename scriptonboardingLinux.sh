@@ -116,6 +116,7 @@ if [ "$EUID" -ne 0 ] then
 echo -e "{$err} PLEASE RUN THIS SCRIPT AS ROOT" 
 exit 1 
 fi
+unzip LinuxOnboarding.zip
 echo -e "${info}CREATING USER"
 useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 gpasswd -a "$1" sudo
