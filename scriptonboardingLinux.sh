@@ -9,12 +9,6 @@ err="\033[1;31m[:]\033[m"
 #FUNCTIONS
 
 FuncCrowdstrike(){
-#CALL TO THE REPOSITORY
-#
-echo -e "${info} CLONNING THE REPOSITORY"
-sudo git clone https://github.com/Enhra/LinuxOnboarding.git
-echo -e "${msg} REPOSITORY READY"
-#
 
 #CROWDSTRIKE INSTALLATION
 #
@@ -125,11 +119,8 @@ fi
 echo -e "${info}CREATING USER"
 useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 gpasswd -a "$1" sudo
+passwd -e "$1"
 echo -e "${info}USER READY"
-#
-echo -e "${info}INSTALLING GIT"
-sudo apt-get install git -y
-echo -e "${info}GIT READY"
 #
 FuncCrowdstrike
 #
