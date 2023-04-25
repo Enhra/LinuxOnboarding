@@ -13,12 +13,12 @@ FuncCrowdstrike(){
 #CROWDSTRIKE INSTALLATION
 #
 echo -e "${info} INSTALLING CROWDSTRIKE"
-unzip LinuxOnboarding/'Crowdstrike for Linux.zip'
-dpkg -i 'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
+unzip /onboarding/'Crowdstrike for Linux.zip'
+dpkg -i /onboarding/'Crowdstrike for Linux'/falcon-sensor_6.29.0-12606_amd64.deb
 echo -e "${msg} CROWDSTRIKE READY"
 #
 echo -e "${info} DELETING RESIDUAL FILES"
-rm -r 'Crowdstrike for Linux'
+rm -r /onboarding/'Crowdstrike for Linux'
 echo -e "${msg} RESIDUAL FILES DELETED"
 #
 
@@ -104,8 +104,8 @@ apt install -y mdatp
 echo -e "${msg} MICROSOFT DEFENDER INSTALLED"
 #
 echo -e "${info} CLIENT MICROSOFT DEFENDER SETUP"
-unzip LinuxOnboarding/'MicrosoftDefenderATPOnboardingLinuxServer.zip'
-python3 MicrosoftDefenderATPOnboardingLinuxServer.py
+unzip /onboarding/'MicrosoftDefenderATPOnboardingLinuxServer.zip'
+python3 /onboarding/MicrosoftDefenderATPOnboardingLinuxServer.py
 mdatp config real-time-protection --value enabled
 echo -e "${info} CLIENT MICROSOFT DEFENDER SETUP READY"
 }
@@ -116,7 +116,6 @@ if [ "$EUID" -ne 0 ] then
 echo -e "{$err} PLEASE RUN THIS SCRIPT AS ROOT" 
 exit 1 
 fi
-unzip LinuxOnboarding.zip
 echo -e "${info}CREATING USER"
 useradd -U -d "/home/$1" -m -p $(openssl passwd -1 "Scalefast-LinuxPTT$2") -s "/bin/bash" "$1"
 gpasswd -a "$1" sudo
@@ -137,5 +136,5 @@ echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAN
 echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
 echo -e "${info} ENROLL THE MACHINE TO SCALEFAST'S LANDSCAPE BY USING THE COMMAND: 'landscape-config --computer-title=PTT### account-name=scalefast-sl --script-users=root'"
 #
-rm -r LinuxOnboarding
+rm -r /onboarding
 
